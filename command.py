@@ -23,6 +23,8 @@ def run_command(cmd_raw):
         return command_remove_tmp(cmd_raw)
     elif cmd[0] == 'upload':
         return command_upload(cmd_raw)
+    elif cmd[0] == 'setformat':
+        return command_setformat(cmd_raw)
     else:
         raise Exception(not_a_command_error(cmd[0]))
 
@@ -70,7 +72,7 @@ def command_upload(cmd_raw):
     cmd = cmd_raw.split(" ", 1)
     if len(cmd) != 2:
         raise Exception(parameters_amount_error("1"))
-    if cmd[0]=='\'':
+    if cmd[1][0]=='\'':
         res = picture.upload_image(cmd[1][1:-1])
     else:
         res = picture.upload_image(cmd[1])
