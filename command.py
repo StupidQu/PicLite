@@ -74,5 +74,19 @@ def command_upload(cmd_raw):
         res = picture.upload_image(cmd[1][1:-1])
     else:
         res = picture.upload_image(cmd[1])
-    pyperclip.copy(res["url"])
+    if config.is_exist("Format") == False:
+        config.set_config("Format", "Format", "markdown")
+    if config.get_config("Format", "Format") == 'markdown':
+        pyperclip.copy("![](" + res["url"] + ")")
+    else:
+        pyperclip.copy(res["url"])
     print("Upload Success!\nUrl:" + res["url"] + "(Copied)")
+
+
+def command_setformat(cmd_raw):
+    cmd = cmd_raw.split(' ')
+    if len(cmd) != 2:
+        raise Exception(parameters_amount_error("1"))
+    if cmd[1] != "markdown" and cmd[1] != "plain":
+        raise Exception(parameter_input_error("1", "markdown or plain", cmd[1]))
+    config.set_config("Format", "Format", cmd[1])
