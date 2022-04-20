@@ -24,7 +24,6 @@ def is_exist(section):
 def set_config(section, key, text):
     conf = configparser.ConfigParser()
     path = os.getcwd()
-
     confpath = path + "/settings.conf"
     if is_exist(section) == False:
         create_section(section)

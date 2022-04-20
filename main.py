@@ -1,4 +1,3 @@
-import usr_token
 import command
 
 if __name__ == "__main__":

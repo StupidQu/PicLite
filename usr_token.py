@@ -13,7 +13,6 @@ def web_get_token(usr, pwd):
         "password": pwd
     }
     response = requests.post(url, data=data)
-    print(data)
     if response.status_code != 200:
         raise "The status_code != 200 (token.py/patch_token)"
 
