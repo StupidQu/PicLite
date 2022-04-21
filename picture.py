@@ -29,6 +29,9 @@ def upload_image(path):
     response = requests.post(url, params=params, headers=headers, files=files)
     result = json.loads(response.text)
     if result["success"] != True:
+        if result["message"] == "Can't get target upload source info":
+            print(clip_empty_error())
+            return None
         print(upload_image_error(result["message"]))
         return None
     return result["data"]
