@@ -112,7 +112,7 @@ def command_upload(cmd_raw):
         pyperclip.copy("![](" + res["url"] + ")")
     else:
         pyperclip.copy(res["url"])
-    print("Upload Success!\nUrl:" + res["url"] + "(Copied)")
+    print("Upload" + Fore.GREEN + " successfully" + Fore.RESET + ". URL:" + Fore.CYAN +  res["url"] + Fore.RESET + "(Copied)" + Fore.RESET)
 
 
 def command_setformat(cmd_raw):
