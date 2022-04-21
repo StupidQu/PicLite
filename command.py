@@ -25,9 +25,30 @@ def run_command(cmd_raw):
         return command_upload(cmd_raw)
     elif cmd[0] == 'setformat':
         return command_setformat(cmd_raw)
+    elif cmd[0] == 'clip':
+        return command_clip(cmd_raw)
     else:
         print(not_a_command_error(cmd[0]))
 
+
+def command_clip(cmd_raw):
+    cmd = cmd_raw.split(' ')
+    if len(cmd) != 1:
+        print(parameters_amount_error("0"))
+    os.system("xclip -selection clipboard -t image/png -o > tmp.png")
+    path = os.getcwd()
+    res = picture.upload_image(path + "/tmp.png")
+    os.remove(path + "/tmp.png")
+    if res is None:
+        return
+    if config.is_exist("Format") == False:
+        config.set_config("Format", "Format", "markdown")
+    if config.get_config("Format", "Format") == 'markdown':
+        pyperclip.copy("![](" + res["url"] + ")")
+    else:
+        pyperclip.copy(res["url"])
+    print("Upload" + Fore.GREEN + " successfully" + Fore.RESET + ". URL:" + Fore.CYAN +  res["url"] + Fore.RESET + "(Copied)" + Fore.RESET)
+    
 
 def command_remove_tmp(cmd_raw):
     cmd = cmd_raw.split(" ")
@@ -77,14 +98,14 @@ def command_upload(cmd_raw):
     if len(cmd) != 2:
         print(parameters_amount_error("1"))
         return
-    if cmd[1][0]=='\'':
+    if cmd[1][0] == '\'':
         res = picture.upload_image(cmd[1][1:-1])
     else:
         res = picture.upload_image(cmd[1])
-    
+
     if res is None:
         return
-    
+
     if config.is_exist("Format") == False:
         config.set_config("Format", "Format", "markdown")
     if config.get_config("Format", "Format") == 'markdown':

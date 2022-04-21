@@ -22,6 +22,9 @@ def upload_image_error(message):
 def file_do_not_exist_error(file_name):
     return PREFIX + "File " +  Fore.CYAN + file_name + Fore.RESET + " doesn\'t exist."
 
+def clip_empty_error():
+    return PREFIX + "Clipboard is empty!"
+
 # if __name__ == "__main__":
 #     print(parameter_input_error("1", "Markdown or Plain", "MarkUp"))
 #     print(parameters_amount_error("1"))

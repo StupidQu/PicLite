@@ -15,8 +15,8 @@ def logger_init():
 
 if __name__ == "__main__":
     # logger_init()
-    strin = input()
+    strin = input("> ")
     while command.is_command(strin):
         command.run_command(strin)
-        strin = input()
+        strin = input("> ")
     exit()
