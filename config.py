@@ -14,11 +14,24 @@ def get_config(section, key=None):
 
 
 def is_exist(section):
+    # Don't use this function anymore.
+    return is_section_exist(section)
+
+
+def is_section_exist(section):
     conf = configparser.ConfigParser()
     path = os.getcwd()
     confpath = path + "/settings.conf"
     conf.read(confpath, encoding="UTF-8")
     return conf.has_section(section)
+
+
+def is_option_exist(section, option):
+    conf = configparser.ConfigParser()
+    path = os.getcwd()
+    confpath = path + "/settings.conf"
+    conf.read(confpath, encoding="UTF-8")
+    return conf.has_option(section, option)
 
 
 def set_config(section, key, text):
