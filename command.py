@@ -98,8 +98,12 @@ def command_upload(cmd_raw):
     if len(cmd) != 2:
         print(parameters_amount_error("1"))
         return
+    end = len(cmd[1]) - 1
+    # print(cmd[1])
+    while cmd[1][end] == ' ':
+        end = end - 1
     if cmd[1][0] == '\'':
-        res = picture.upload_image(cmd[1][1:-1])
+        res = picture.upload_image(cmd[1][1:end])
     else:
         res = picture.upload_image(cmd[1])
 

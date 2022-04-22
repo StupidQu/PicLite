@@ -4,7 +4,7 @@ from config import is_section_exist, get_config, set_config
 import logging
 
 version = "0.1.1"
-is_dev_ver = True
+is_dev_ver = False
 
 
 def logger_init():
